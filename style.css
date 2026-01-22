@@ -168,6 +168,8 @@ body {
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
+    mix-blend-mode: screen;
+    /* Removes black background */
 }
 
 #bg-video-blur {
@@ -186,6 +188,8 @@ body {
     transform: scale(1.1);
     /* Bleed edges */
     will-change: transform;
+    mix-blend-mode: screen;
+    /* Removes black background */
 }
 
 .container {
