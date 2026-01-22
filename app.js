@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Shared
     cursor: document.getElementById('customCursor'),
     bgVideo: document.getElementById('bg-video'),
+    bgVideoBlur: document.getElementById('bg-video-blur'), // New
     logoVideo: document.querySelector('.title-video video'),
 
     // Home Page

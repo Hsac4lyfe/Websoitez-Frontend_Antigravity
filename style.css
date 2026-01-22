@@ -162,12 +162,30 @@ body {
     width: 100vw;
     height: 100vh;
     object-fit: contain;
+    /* Revert to contain (sharp, floating) */
     pointer-events: none;
-    filter: brightness(0.95);
     z-index: -1 !important;
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
+}
+
+#bg-video-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    /* Fill the screen */
+    pointer-events: none;
+    filter: blur(10px) brightness(1.2);
+    /* Light blur + slight brightness boost */
+    z-index: -2 !important;
+    /* Behind the main video */
+    transform: scale(1.1);
+    /* Bleed edges */
+    will-change: transform;
 }
 
 .container {
@@ -529,7 +547,8 @@ button:active {
         justify-content: flex-start !important;
         padding-top: 2vh !important;
         padding-bottom: 5vh !important;
-        gap: 3vh !important;
+        gap: 1.5vh !important;
+        /* Compact gap */
         height: auto !important;
         min-height: 100vh !important;
         overflow-y: auto !important;
@@ -612,12 +631,11 @@ button:active {
         font-size: 1rem !important;
     }
 
-    /* Force background video fill (Mild Distortion) */
+    /* Revert mobile stretch override - use contain for sharp layer */
     #bg-video {
         width: 100vw !important;
         height: 100vh !important;
-        object-fit: fill !important;
-        /* 'fill' stretches it. 'cover' would crop. User requested 'stretch'. */
+        object-fit: contain !important;
     }
 }
 
@@ -722,18 +740,22 @@ body.is-returning .title-video {
 }
 
 /* ---------- INITIAL PAGE FADE-IN ---------- */
+/* Sync fade-in for both videos */
 body.is-loading #bg-video,
+body.is-loading #bg-video-blur,
 body.is-loading .title-video {
     opacity: 0;
 }
 
 #bg-video,
+#bg-video-blur,
 .title-video {
     opacity: 1;
     transition: opacity 0.6s ease;
 }
 
-#bg-video {
+#bg-video,
+#bg-video-blur {
     transition-delay: 0s;
 }
 
