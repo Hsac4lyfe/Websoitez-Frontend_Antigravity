@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advertise with Us – Shorts2Text</title>
+
+  <!-- favicons light + dark -->
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" href="favicon-dark.ico" media="(prefers-color-scheme: dark)">
+
+  <!-- preload hero videos -->
+  <link rel="preload" href="Shorts2Text02Pixelated02.webm" as="video">
+  <link rel="preload" href="cursor05.webm" as="video">
+
+  <link rel="stylesheet" href="style.css" />
+
+
+</head>
+
+<body class="is-loading">
+  <!-- AD-BOXES (same as index.html) -->
+  <div class="s2t-ad-placeholder s2t-ad-sidebar s2t-ad-left" aria-hidden="true">
+    <a href="/advertise.html" class="s2t-ad-link">
+      <div class="s2t-ad-box">YOUR AD!<br />CLICK HERE!</div>
+    </a>
+    <a href="/advertise.html" class="s2t-ad-link">
+      <div class="s2t-ad-box">YOUR AD!<br />CLICK HERE!</div>
+    </a>
+    <a href="/advertise.html" class="s2t-ad-link">
+      <div class="s2t-ad-box">YOUR AD!<br />CLICK HERE!</div>
+    </a>
+  </div>
+
+  <div class="s2t-ad-placeholder s2t-ad-sidebar s2t-ad-right" aria-hidden="true">
+    <a href="/advertise.html" class="s2t-ad-link">
+      <div class="s2t-ad-box">YOUR AD!<br />CLICK HERE!</div>
+    </a>
+    <a href="/advertise.html" class="s2t-ad-link">
+      <div class="s2t-ad-box">YOUR AD!<br />CLICK HERE!</div>
+    </a>
+    <a href="/advertise.html" class="s2t-ad-link">
+      <div class="s2t-ad-box">YOUR AD!<br />CLICK HERE!</div>
+    </a>
+  </div>
+
+  <div class="s2t-ad-placeholder s2t-ad-bottom-mobile" aria-hidden="true">
+    <a href="/advertise.html" class="s2t-ad-link">
+      <div class="s2t-ad-box">YOUR AD!<br />CLICK HERE!</div>
+    </a>
+  </div>
+
+  <!-- BACKGROUND -->
+  <video muted autoplay loop playsinline preload="auto" id="bg-video">
+    <source src="JellyDarkMode12.webm" type="video/webm">
+    <source src="JellyDarkMode12.mp4" type="video/mp4">
+  </video>
+
+  <!-- CENTRED WRAPPER (keeps logo position identical to index.html) -->
+  <div class="center-wrapper">
+    <!-- HOME LINK + LOGO -->
+    <!-- The class is on the link so Flexbox can see it -->
+    <a href="https://websoitez-frontend.vercel.app" aria-label="Shorts2Text animated logo" class="title-video">
+      <video muted autoplay loop playsinline preload="auto" oncontextmenu="return false"
+        style="width: 100%; height: auto; -webkit-touch-callout:none; -webkit-user-select:none; user-select:none;">
+        <source src="Shorts2Text02Pixelated02.mov" type='video/quicktime; codecs="hvc1"'>
+        <source src="Shorts2Text02Pixelated02.webm" type="video/webm">
+      </video>
+    </a>
+    <!-- FORM -->
+    <form action="https://api.web3forms.com/submit" method="POST" class="ad-form" id="adForm">
+      <h2>Interested in ad space?</h2>
+      <input type="hidden" name="access_key" value="02a64816-48b6-42c5-99e6-3d218773251f">
+      <input type="hidden" name="subject" value="New Ad-Space Inquiry">
+      <input type="hidden" name="from_name" value="Shorts2Text Ad Page">
+      <div class="input-group">
+        <input type="email" name="from_email" id="emailInput" placeholder="Your email address" required
+          autocomplete="off" data-bwignore />
+
+        <!-- The Red Tooltip -->
+        <span class="custom-tooltip" id="emailTooltip">Please fill out this field.</span>
+      </div>
+      <!-- REPLACE the textarea section in advertise.html with this -->
+      <div class="input-group">
+        <textarea name="message" id="messageInput" maxlength="500" required placeholder="Write your message here…"
+          autocomplete="off"></textarea>
+        <!-- The Red Tooltip for the Message -->
+        <span class="custom-tooltip" id="messageTooltip">Please fill out this field.</span>
+      </div>
+      <div class="counter"><span id="count">0</span> / 500</div>
+      <button type="submit">Send</button>
+    </form>
+    <!-- THANK-YOU MSG -->
+    <div id="successMsg">✓ Message sent – please wait for a reply within the day!</div>
+  </div>
+
+  <!-- CURSOR -->
+  <video autoplay muted loop playsinline preload="auto" id="customCursor" class="custom-cursor">
+    <source src="cursor05.webm" type="video/webm">
+  </video>
+
+  <!-- SCRIPTS -->
+  <script src="app.js"></script>
+</body>
+
+</html>
