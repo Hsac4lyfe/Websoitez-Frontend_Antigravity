@@ -573,7 +573,6 @@ button:active {
     }
 
     /* Hide sidebars and show mobile ad ONLY in this media query */
-    /* Hide sidebars and show mobile ad ONLY in this media query */
     .s2t-ad-sidebar {
         display: none !important;
     }
@@ -698,7 +697,6 @@ button:active {
 
         /* Removed feathering mask to reveal full video */
     }
-}
 }
 
 
