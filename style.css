@@ -573,12 +573,16 @@ button:active {
     }
 
     /* Hide sidebars and show mobile ad ONLY in this media query */
+    /* Hide sidebars and show mobile ad ONLY in this media query */
     .s2t-ad-sidebar {
         display: none !important;
     }
 
-    .s2t-ad-bottom-mobile {
-        display: flex !important;
+    /* Only show bottom mobile ad on larger phones */
+    @media (min-height: 700px) {
+        .s2t-ad-bottom-mobile {
+            display: flex !important;
+        }
     }
 
     /* Stack inputs for mobile */
@@ -606,6 +610,22 @@ button:active {
         width: 100% !important;
         display: flex;
         gap: 1rem;
+    }
+
+    #copyBtn {
+        height: 100%;
+        /* Match height */
+        padding: 0.8rem 1rem !important;
+        /* Match padding */
+        margin-top: -4px;
+        /* Move up 4px */
+    }
+
+    .status-timer-group {
+        padding: 6px !important;
+        /* Reduced padding */
+        gap: 0 !important;
+        /* Remove gap */
     }
 
     .disclaimer {
