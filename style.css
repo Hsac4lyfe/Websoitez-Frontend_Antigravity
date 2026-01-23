@@ -639,21 +639,25 @@ button:active {
     #bg-video {
         width: 100vw !important;
         height: 100vh !important;
-        /* Start with full screen coverage */
         top: 0 !important;
         left: 0 !important;
-        transform: translateZ(0) scale(0.8) !important;
-        /* Scale down to 80% as requested */
+
+        /* Experimental Scale Control */
+        --video-scale: 2.2;
+        /* Change this number to resize! (1.0 = fit, 3.0 = huge) */
+
+        transform: translateZ(0) scale(var(--video-scale)) !important;
         transform-origin: center center !important;
-        object-fit: cover !important;
-        /* Fill the container content-wise */
+
+        /* THE FIX: Use 'contain' so the original video aspect ratio is fully preserved INSIDE the box before scaling */
+        object-fit: contain !important;
         object-position: center !important;
+
         mix-blend-mode: screen;
 
-        /* Feathered Edges (Question 9) */
-        -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 95%);
-        mask-image: radial-gradient(circle at center, black 60%, transparent 95%);
+        /* Removed feathering mask to reveal full video */
     }
+}
 }
 
 
