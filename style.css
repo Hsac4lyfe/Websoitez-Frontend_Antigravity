@@ -305,22 +305,84 @@ textarea:focus-visible {
     display: block;
 }
 
+/* --- MECHANICAL BUTTONS (Physical Tactile Feel) --- */
+button,
+.dropbtn {
+    position: relative;
+    background: #000000 !important;
+    color: var(--text-color) !important;
+    border: 1px solid #ffffff !important;
+    /* Hard white border */
+    box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.3) !important;
+    /* Hard distinct shadow */
+    transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0, 0, 0.2, 1) !important;
+    overflow: hidden !important;
+    /* Contain the scanline */
+}
+
+/* Active Press State (Click) */
+button:active:not(:disabled),
+.dropbtn:active:not(:disabled) {
+    transform: translate(2px, 2px) !important;
+    /* Physically move down */
+    box-shadow: 2px 2px 0 rgba(255, 255, 255, 0.3) !important;
+    /* Shadow compresses */
+}
+
+/* Hover State - General */
 button:hover:not(:disabled) {
-    background: #000000;
-    color: var(--text-color);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-    /* Keep the glow, remove color change */
+    background: #111 !important;
+    /* Subtle lighten */
 }
 
 button:disabled {
-    background: var(--disabled-color);
-    opacity: 0.4;
+    background: #000;
+    border-color: #333 !important;
+    color: #555 !important;
+    box-shadow: none !important;
     cursor: not-allowed;
 }
 
-button:active {
-    transform: scale(0.97);
-    transition: transform 0.08s ease;
+/* --- TRANSCRIBE DOMINANCE (Scanline Effect) --- */
+#transcribeBtn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+    transform: skewX(-25deg);
+    pointer-events: none;
+    transition: none;
+}
+
+#transcribeBtn:hover::after {
+    animation: scanline-swipe 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scanline-swipe {
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 200%;
+        opacity: 0;
+    }
+}
+
+/* --- COPY SUBTLETY --- */
+#copyBtn:hover {
+    filter: brightness(1.3);
 }
 
 .button-group.side {
@@ -377,12 +439,29 @@ button:active {
     left: 0;
     height: 100%;
     width: 0%;
-    background-color: var(--accent-color);
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 8px var(--accent-color);
-    border-radius: 10px;
-    transition: width 0.3s ease;
+    /* MECHANICAL STRIPES */
+    background: repeating-linear-gradient(45deg,
+            #222,
+            #222 10px,
+            #000 10px,
+            #000 20px) !important;
+    background-size: 200% 100% !important;
+    animation: mechanical-load 1s linear infinite !important;
+    border-right: 2px solid #fff;
+    /* Leading edge */
+    box-shadow: none !important;
+    transition: width 0.3s ease-out;
     pointer-events: none;
+}
+
+@keyframes mechanical-load {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 28px 0;
+    }
 }
 
 #status {
