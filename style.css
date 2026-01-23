@@ -623,8 +623,8 @@ button:active {
         height: auto !important;
         /* Revert height override */
         padding: 0.8rem 1rem !important;
-        margin-top: -5px !important;
-        /* Relaxed spacing */
+        margin-top: 0px !important;
+        /* Equalized spacing */
         margin-bottom: 0px !important;
         /* Tight bottom */
         position: relative;
@@ -639,10 +639,14 @@ button:active {
     }
 
     #progress-container {
-        margin: 2px 0 0 0 !important;
-        /* Tight spacing inside box */
+        margin: 8px 0 3px 0 !important;
+        /* Spacing for visual separation */
         width: 90% !important;
         /* Fit inside the status box padding */
+        background: rgba(255, 255, 255, 0.2) !important;
+        /* Whitish gray default track */
+        border-radius: 10px;
+        min-height: 6px;
     }
 
     .disclaimer {
