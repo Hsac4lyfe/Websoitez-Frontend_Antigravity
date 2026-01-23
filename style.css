@@ -623,12 +623,13 @@ button:active {
     }
 
     #copyBtn {
-        height: 100%;
+        height: auto !important;
+        /* Revert height override */
         padding: 0.8rem 1rem !important;
-        margin-top: 5px !important;
-        /* * Single spacing unit */
-        margin-bottom: 5px !important;
-        /* * Single spacing unit */
+        margin-top: -8px !important;
+        /* Push UP closer to timer */
+        margin-bottom: 0px !important;
+        /* Tight bottom */
     }
 
     .status-timer-group {
