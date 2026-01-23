@@ -642,14 +642,17 @@ button:active {
         /* Start with full screen coverage */
         top: 0 !important;
         left: 0 !important;
-        transform: translateZ(0) scale(0.6) !important;
-        /* Scale down to 60% ("Meet in the middle") */
+        transform: translateZ(0) scale(0.8) !important;
+        /* Scale down to 80% as requested */
         transform-origin: center center !important;
-        /* Shrink towards the middle */
         object-fit: cover !important;
-        /* Initially cover everything */
+        /* Fill the container content-wise */
         object-position: center !important;
         mix-blend-mode: screen;
+
+        /* Feathered Edges (Question 9) */
+        -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 95%);
+        mask-image: radial-gradient(circle at center, black 60%, transparent 95%);
     }
 }
 
