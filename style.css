@@ -551,8 +551,8 @@ button:active {
         justify-content: flex-start !important;
         padding-top: 2vh !important;
         padding-bottom: 5vh !important;
-        gap: 1.5vh !important;
-        /* Compact gap */
+        gap: 0.5vh !important;
+        /* * Single spacing unit */
         height: auto !important;
         min-height: 100vh !important;
         overflow-y: auto !important;
@@ -612,34 +612,40 @@ button:active {
         gap: 1rem;
     }
 
+    .right-stack {
+        gap: 5px !important;
+        /* * Single spacing unit between elements */
+    }
+
+    /* Override button group margin */
+    .button-group.side {
+        margin-bottom: 0 !important;
+    }
+
     #copyBtn {
         height: 100%;
-        /* Match height */
         padding: 0.8rem 1rem !important;
-        /* Match padding */
-        margin-top: -12px !important;
-        /* Move up significantly */
-        margin-bottom: 2px !important;
+        margin-top: 5px !important;
+        /* * Single spacing unit */
+        margin-bottom: 5px !important;
+        /* * Single spacing unit */
     }
 
     .status-timer-group {
         padding: 4px !important;
-        /* Reduced padding further */
         gap: 0 !important;
-        margin-bottom: 2px !important;
-        /* Tiny gap before bar */
+        margin-bottom: 0 !important;
+        /* Remove extra margin */
     }
 
     #progress-container {
-        margin: 2px 0 6px 0 !important;
-        /* Tight margin around bar */
+        margin: 5px 0 5px 0 !important;
+        /* * Single spacing unit */
     }
 
     .disclaimer {
         margin-top: 5px !important;
-        /* Pull closer to textarea */
         margin-bottom: 70px !important;
-        /* Push AD away */
         flex-shrink: 0;
     }
 
