@@ -578,11 +578,9 @@ button:active {
         display: none !important;
     }
 
-    /* Only show bottom mobile ad on larger phones */
-    @media (min-height: 700px) {
-        .s2t-ad-bottom-mobile {
-            display: flex !important;
-        }
+    /* Show bottom mobile ad ALWAYS */
+    .s2t-ad-bottom-mobile {
+        display: flex !important;
     }
 
     /* Stack inputs for mobile */
@@ -626,8 +624,8 @@ button:active {
         height: auto !important;
         /* Revert height override */
         padding: 0.8rem 1rem !important;
-        margin-top: -20px !important;
-        /* Aggressive pullback */
+        margin-top: -5px !important;
+        /* Relaxed spacing */
         margin-bottom: 0px !important;
         /* Tight bottom */
         position: relative;
