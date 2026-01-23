@@ -617,19 +617,29 @@ button:active {
         /* Match height */
         padding: 0.8rem 1rem !important;
         /* Match padding */
-        margin-top: -4px;
-        /* Move up 4px */
+        margin-top: -12px !important;
+        /* Move up significantly */
+        margin-bottom: 2px !important;
     }
 
     .status-timer-group {
-        padding: 6px !important;
-        /* Reduced padding */
+        padding: 4px !important;
+        /* Reduced padding further */
         gap: 0 !important;
-        /* Remove gap */
+        margin-bottom: 2px !important;
+        /* Tiny gap before bar */
+    }
+
+    #progress-container {
+        margin: 2px 0 6px 0 !important;
+        /* Tight margin around bar */
     }
 
     .disclaimer {
-        margin-bottom: 2vh;
+        margin-top: 5px !important;
+        /* Pull closer to textarea */
+        margin-bottom: 70px !important;
+        /* Push AD away */
         flex-shrink: 0;
     }
 
