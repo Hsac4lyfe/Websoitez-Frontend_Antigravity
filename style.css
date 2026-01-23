@@ -650,7 +650,7 @@ button:active {
     }
 
     .disclaimer {
-        margin-top: 2px !important;
+        margin-top: -3px !important;
         /* Pull very close to textarea */
         margin-bottom: 50px !important;
         /* Reduce buffer to allow Ad box space */
