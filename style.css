@@ -642,13 +642,17 @@ button:active {
     }
 
     #progress-container {
-        margin: 5px 0 5px 0 !important;
-        /* * Single spacing unit */
+        margin: 2px 0 0 0 !important;
+        /* Tight spacing inside box */
+        width: 90% !important;
+        /* Fit inside the status box padding */
     }
 
     .disclaimer {
-        margin-top: 5px !important;
-        margin-bottom: 70px !important;
+        margin-top: 2px !important;
+        /* Pull very close to textarea */
+        margin-bottom: 50px !important;
+        /* Reduce buffer to allow Ad box space */
         flex-shrink: 0;
     }
 
