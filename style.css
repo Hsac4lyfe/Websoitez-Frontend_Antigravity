@@ -489,6 +489,13 @@ button:disabled {
     }
 }
 
+/* Stop glitch after finish */
+.paused-glitch {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
 /* 10. Completion Invert */
 .invert-flash {
     filter: invert(1) !important;

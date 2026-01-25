@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.barEl.style.width = '0%';
     DOM.barEl.style.transition = 'none'; /* BLOCKY: No smoothing */
     DOM.barEl.classList.remove('invert-flash'); /* Reset flash */
+    DOM.barEl.classList.remove('paused-glitch'); /* Reset glitch pause */
     STATE.simulatedProgress = 0; /* track fake progress */
     DOM.statusEl.textContent = 'Warming up the servers…';
     DOM.timerEl.innerHTML = '00<span id="colon">:</span>00';
@@ -252,6 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
       DOM.barEl.style.width = '100%';
       DOM.barEl.classList.add('invert-flash'); /* 10. Invert Flash */
       STATE.simulatedProgress = 100;
+
+      /* Linger for 1s then freeze */
+      setTimeout(() => {
+        DOM.barEl.classList.add('paused-glitch');
+      }, 1000);
 
       DOM.resultEl.style.opacity = '0';
       setTimeout(() => {
