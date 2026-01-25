@@ -176,7 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.resultEl.value = '';
     DOM.resultEl.value = '';
     DOM.barEl.style.width = '0%';
-    DOM.barEl.style.transition = 'width 1s ease-out'; /* Ensure ease-out */
+    DOM.barEl.style.width = '0%';
+    DOM.barEl.style.transition = 'none'; /* BLOCKY: No smoothing */
+    DOM.barEl.classList.remove('invert-flash'); /* Reset flash */
     STATE.simulatedProgress = 0; /* track fake progress */
     DOM.statusEl.textContent = 'Warming up the servers…';
     DOM.timerEl.innerHTML = '00<span id="colon">:</span>00';
@@ -244,8 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       DOM.resultEl.value = transcript;
       DOM.statusEl.textContent = 'Transcription complete!';
+      DOM.resultEl.value = transcript;
+      DOM.statusEl.textContent = 'Transcription complete!';
       DOM.barEl.style.transition = 'none'; /* Instant snap */
       DOM.barEl.style.width = '100%';
+      DOM.barEl.classList.add('invert-flash'); /* 10. Invert Flash */
       STATE.simulatedProgress = 100;
 
       DOM.resultEl.style.opacity = '0';
@@ -299,16 +304,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Randomize increment (0-15%)
     // 30% chance to stall (increment 0)
     const isStall = Math.random() < 0.3;
-    const increment = isStall ? 0 : Math.floor(Math.random() * 15) + 1;
+    const increment = isStall ? 0 : 5; // 2. Grid Style (5% blocks)
 
     STATE.simulatedProgress = Math.min(STATE.simulatedProgress + increment, 90);
 
-    // 3. Apply changes (CSS transition handles ease-out)
+    // 3. Apply changes (Instant snap)
     DOM.barEl.style.width = `${STATE.simulatedProgress}%`;
     updateStatusText(); // Keep text synced to "perceived" progress
 
-    // 4. Re-roll every second
-    STATE.progressTimer = setTimeout(simulateProgress, 1000);
+    // 4. Re-roll random interval for "Appearing" effect
+    const randomDelay = Math.floor(Math.random() * 800) + 200; // Random delay 200ms-1000ms
+    STATE.progressTimer = setTimeout(simulateProgress, randomDelay);
   }
 
   function updateStatusText() {

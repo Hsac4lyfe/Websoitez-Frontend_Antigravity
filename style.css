@@ -426,9 +426,10 @@ button:disabled {
     position: relative;
     width: 100%;
     height: 14px;
-    /* Track: Faint dashed outline */
-    border: 1px dashed rgba(255, 255, 255, 0.3) !important;
-    background: transparent !important;
+    /* Track: Wireframe Outline */
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    background: #000000 !important;
+    /* Static background */
     /* Ensure high contrast */
     border-radius: 4px;
     padding: 2px;
@@ -444,24 +445,54 @@ button:disabled {
     left: 0;
     height: 100%;
     width: 0%;
-    /* Segmented Data Blocks */
-    background: repeating-linear-gradient(90deg,
-            rgba(220, 235, 255, 0.9) 0px,
-            rgba(220, 235, 255, 0.9) 8px,
-            /* 8px block */
-            transparent 8px,
-            transparent 12px
-            /* 4px gap */
-        ) !important;
-    /* Cursor Block (Leading Edge) */
-    border-right: 3px solid #ffffff !important;
-    /* Moonlight Glow */
-    box-shadow: 0 0 10px rgba(200, 225, 255, 0.6), inset 0 0 10px rgba(200, 225, 255, 0.2) !important;
-    /* Pulse Animation */
-    animation: data-pulse 1.5s infinite ease-in-out !important;
-    border-radius: 2px;
-    transition: width 0.3s ease-out;
+    /* 5. Dithered Pixel Pattern */
+    background:
+        radial-gradient(#fff 20%, transparent 25%) 0 0,
+        radial-gradient(#fff 20%, transparent 25%) 4px 4px !important;
+    background-color: #000 !important;
+    background-size: 8px 8px !important;
+
+    /* 6. Blinking Cursor Block */
+    border-right: 6px solid #fff !important;
+
+    /* 4. Glitch Flick */
+    animation: glitch-flick 0.3s infinite !important;
+    box-shadow: none !important;
+    border-radius: 0px !important;
+    transition: none !important;
+    /* 1. Instant appearing */
     pointer-events: none;
+}
+
+@keyframes glitch-flick {
+    0% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+
+    25% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+        filter: brightness(1.5);
+    }
+
+    75% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+/* 10. Completion Invert */
+.invert-flash {
+    filter: invert(1) !important;
+    transition: filter 0.1s step-end;
 }
 
 @keyframes data-pulse {
@@ -742,8 +773,8 @@ button:disabled {
         width: 90% !important;
         /* Fit inside the status box padding */
         /* Revert mobile specific BG to match new style */
-        background: transparent !important;
-        border: 1px dashed rgba(255, 255, 255, 0.3) !important;
+        background: #000000 !important;
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
         border-radius: 4px;
         min-height: 14px;
     }
