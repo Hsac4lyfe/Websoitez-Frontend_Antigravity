@@ -176,10 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.resultEl.value = '';
     DOM.resultEl.value = '';
     DOM.barEl.style.width = '0%';
+    DOM.barEl.className = ''; /* Nukes ALL classes */
+    DOM.barEl.id = 'progress-bar'; /* Restore ID */
     DOM.barEl.style.width = '0%';
-    DOM.barEl.style.transition = 'none'; /* BLOCKY: No smoothing */
-    DOM.barEl.className = ''; /* Reset all effect classes */
-    DOM.barEl.id = 'progress-bar'; /* Ensure ID stays */
+    DOM.barEl.style.transition = 'none';
+    DOM.barEl.style.animation = ''; /* Let CSS handle default */
     STATE.simulatedProgress = 0; /* track fake progress */
     DOM.statusEl.textContent = 'Warming up the servers…';
     DOM.timerEl.innerHTML = '00<span id="colon">:</span>00';

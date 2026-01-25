@@ -136,6 +136,9 @@ body {
     z-index: 10;
 
     /* Visuals (The "How it looks" logic - KEEP THESE) */
+    /* The provided code snippet appears to be JavaScript and cannot be directly inserted into a CSS file while maintaining syntactic correctness. */
+    /* If this is intended to be CSS, please provide valid CSS properties. */
+    /* If this is intended for a JavaScript file, please provide the correct file context. */
     pointer-events: auto;
     /* Makes sure you can click the link */
     border-radius: 10px;
@@ -445,12 +448,17 @@ button:disabled {
     left: 0;
     height: 100%;
     width: 0%;
-    /* 5. Dithered Pixel Pattern */
-    background:
-        radial-gradient(#fff 20%, transparent 25%) 0 0,
-        radial-gradient(#fff 20%, transparent 25%) 4px 4px !important;
+    /* 5. Vertical Bars Pattern */
+    background: repeating-linear-gradient(90deg,
+            #fff 0px,
+            #fff 4px,
+            /* 4px bar */
+            transparent 4px,
+            transparent 6px
+            /* 2px gap */
+        ) !important;
     background-color: #000 !important;
-    background-size: 8px 8px !important;
+    background-size: 100% 100% !important;
 
     /* 6. Blinking Cursor Block */
     border-right: 6px solid #fff !important;
