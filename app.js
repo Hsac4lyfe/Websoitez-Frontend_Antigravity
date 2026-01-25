@@ -174,7 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetUI() {
     DOM.resultEl.value = '';
+    DOM.resultEl.value = '';
     DOM.barEl.style.width = '0%';
+    DOM.barEl.style.transition = 'width 1s ease-out'; /* Ensure ease-out */
+    STATE.simulatedProgress = 0; /* track fake progress */
     DOM.statusEl.textContent = 'Warming up the servers…';
     DOM.timerEl.innerHTML = '00<span id="colon">:</span>00';
   }
@@ -208,6 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function stopTimer() {
     cancelAnimationFrame(STATE.timerRAF);
     STATE.timerRAF = null;
+    clearTimeout(STATE.progressTimer); /* Stop simulation */
+    STATE.progressTimer = null;
   }
 
   function tickTimer() {
@@ -231,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setUIState(true);
     resetUI();
     startTimer();
+    simulateProgress(); /* Start the simulation loop */
 
     try {
       const taskId = await startTranscription(url);
@@ -238,7 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       DOM.resultEl.value = transcript;
       DOM.statusEl.textContent = 'Transcription complete!';
+      DOM.barEl.style.transition = 'none'; /* Instant snap */
       DOM.barEl.style.width = '100%';
+      STATE.simulatedProgress = 100;
 
       DOM.resultEl.style.opacity = '0';
       setTimeout(() => {
@@ -276,20 +284,41 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.status === 'completed') return data.transcript;
       if (data.status === 'error') throw new Error(data.error);
 
-      updateProgress(data);
+      // Ignore backend progress, use our simulation
+      updateStatusText();
       await new Promise(r => setTimeout(r, CONFIG.POLLING_INTERVAL));
     }
     throw new Error('Timed out');
   }
 
-  function updateProgress(data) {
-    const pct = data.progress || 0;
-    DOM.barEl.style.width = `${pct}%`;
+  /* --- SMART SIMULATION LOGIC --- */
+  function simulateProgress() {
+    // 1. Calculate next step
+    if (STATE.simulatedProgress >= 90) return; // Cap at 90%
 
-    if (pct < 30) DOM.statusEl.textContent = `Analyzing audio… (${pct}%)`;
-    else if (pct < 70) DOM.statusEl.textContent = `Generating text… (${pct}%)`;
-    else DOM.statusEl.textContent = `Finalizing… (${pct}%)`;
+    // 2. Randomize increment (0-15%)
+    // 30% chance to stall (increment 0)
+    const isStall = Math.random() < 0.3;
+    const increment = isStall ? 0 : Math.floor(Math.random() * 15) + 1;
+
+    STATE.simulatedProgress = Math.min(STATE.simulatedProgress + increment, 90);
+
+    // 3. Apply changes (CSS transition handles ease-out)
+    DOM.barEl.style.width = `${STATE.simulatedProgress}%`;
+    updateStatusText(); // Keep text synced to "perceived" progress
+
+    // 4. Re-roll every second
+    STATE.progressTimer = setTimeout(simulateProgress, 1000);
   }
+
+  function updateStatusText() {
+    // Keep text tied to the visual bar so it "feels" true
+    const pct = STATE.simulatedProgress;
+    if (pct < 30) DOM.statusEl.textContent = `Analyzing audio…`;
+    else if (pct < 70) DOM.statusEl.textContent = `Generating text…`;
+    else DOM.statusEl.textContent = `Finalizing…`;
+  }
+  /* ----------------------------- */
 
   function copyToClipboard() {
     if (!DOM.resultEl.value) return;
