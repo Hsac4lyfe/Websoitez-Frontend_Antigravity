@@ -178,8 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.barEl.style.width = '0%';
     DOM.barEl.style.width = '0%';
     DOM.barEl.style.transition = 'none'; /* BLOCKY: No smoothing */
-    DOM.barEl.classList.remove('invert-flash'); /* Reset flash */
-    DOM.barEl.classList.remove('paused-glitch'); /* Reset glitch pause */
+    DOM.barEl.className = ''; /* Reset all effect classes */
+    DOM.barEl.id = 'progress-bar'; /* Ensure ID stays */
     STATE.simulatedProgress = 0; /* track fake progress */
     DOM.statusEl.textContent = 'Warming up the servers…';
     DOM.timerEl.innerHTML = '00<span id="colon">:</span>00';
@@ -247,17 +247,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       DOM.resultEl.value = transcript;
       DOM.statusEl.textContent = 'Transcription complete!';
-      DOM.resultEl.value = transcript;
       DOM.statusEl.textContent = 'Transcription complete!';
-      DOM.barEl.style.transition = 'none'; /* Instant snap */
-      DOM.barEl.style.width = '100%';
-      DOM.barEl.classList.add('invert-flash'); /* 10. Invert Flash */
-      STATE.simulatedProgress = 100;
 
-      /* Linger for 1s then freeze */
+      /* 1. Trigger Recoil (Kickback) */
+      DOM.barEl.classList.add('bar-recoil');
+
+      /* 2. Seal & Flash after recoil (500ms) */
       setTimeout(() => {
-        DOM.barEl.classList.add('paused-glitch');
-      }, 1000);
+        DOM.barEl.classList.remove('bar-recoil');
+        DOM.barEl.classList.add('bar-success');
+        DOM.barEl.style.width = '100%';
+        STATE.simulatedProgress = 100;
+      }, 500);
 
       DOM.resultEl.style.opacity = '0';
       setTimeout(() => {

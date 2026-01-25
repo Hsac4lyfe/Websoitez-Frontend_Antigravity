@@ -489,17 +489,82 @@ button:disabled {
     }
 }
 
-/* Stop glitch after finish */
-.paused-glitch {
-    animation: none !important;
-    opacity: 1 !important;
-    filter: none !important;
+/* --- PRESSURIZE & SEAL EFFECT --- */
+/* 1. Recoil Animation */
+.bar-recoil {
+    animation: recoil-spring 0.5s ease-out forwards !important;
 }
 
-/* 10. Completion Invert */
-.invert-flash {
-    filter: invert(1) !important;
-    transition: filter 0.1s step-end;
+@keyframes recoil-spring {
+    0% {
+        width: 100%;
+    }
+
+    50% {
+        width: 92%;
+    }
+
+    80% {
+        width: 98%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* 2. Success State (Sealed) */
+.bar-success {
+    width: 100% !important;
+    background: #ffffff !important;
+    /* Solid White */
+    border-right: 0px solid transparent !important;
+    /* Cursor winks out */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+    animation: success-sweep 1.2s ease-out forwards !important;
+}
+
+/* 3. Flash & Sweep */
+@keyframes success-sweep {
+    0% {
+        filter: brightness(5);
+        /* Amplify Flash */
+    }
+
+    20% {
+        filter: brightness(1);
+    }
+}
+
+/* 4. Particle Spray */
+.bar-success::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    pointer-events: none;
+    background: transparent;
+    animation: particles-explode 0.6s ease-out forwards;
+}
+
+@keyframes particles-explode {
+    0% {
+        box-shadow: 0 0 0 white;
+        opacity: 1;
+    }
+
+    100% {
+        box-shadow:
+            10px -10px 0 white,
+            20px 5px 0 white,
+            30px -30px 0 white,
+            12px 15px 0 white;
+        opacity: 0;
+        transform: translateX(40px);
+    }
 }
 
 @keyframes data-pulse {
