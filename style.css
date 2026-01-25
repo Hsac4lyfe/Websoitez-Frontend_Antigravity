@@ -426,8 +426,13 @@ button:disabled {
     position: relative;
     width: 100%;
     height: 14px;
-    background-color: var(--disabled-color);
-    border-radius: 10px;
+    /* Track: Faint dashed outline */
+    border: 1px dashed rgba(255, 255, 255, 0.3) !important;
+    background: transparent !important;
+    /* Ensure high contrast */
+    border-radius: 4px;
+    padding: 2px;
+    /* Gap between track and bar */
     overflow: hidden;
     margin: 0;
     pointer-events: none;
@@ -439,30 +444,44 @@ button:disabled {
     left: 0;
     height: 100%;
     width: 0%;
-    /* MECHANICAL STRIPES */
-    background: repeating-linear-gradient(45deg,
-            #222,
-            #222 10px,
-            #000 10px,
-            #000 20px) !important;
-    background-size: 200% 100% !important;
-    animation: mechanical-load 1s linear infinite !important;
-    border-right: 2px solid #fff;
-    /* Leading edge */
-    box-shadow: none !important;
+    /* Segmented Data Blocks */
+    background: repeating-linear-gradient(90deg,
+            rgba(220, 235, 255, 0.9) 0px,
+            rgba(220, 235, 255, 0.9) 8px,
+            /* 8px block */
+            transparent 8px,
+            transparent 12px
+            /* 4px gap */
+        ) !important;
+    /* Cursor Block (Leading Edge) */
+    border-right: 3px solid #ffffff !important;
+    /* Moonlight Glow */
+    box-shadow: 0 0 10px rgba(200, 225, 255, 0.6), inset 0 0 10px rgba(200, 225, 255, 0.2) !important;
+    /* Pulse Animation */
+    animation: data-pulse 1.5s infinite ease-in-out !important;
+    border-radius: 2px;
     transition: width 0.3s ease-out;
     pointer-events: none;
 }
 
-@keyframes mechanical-load {
+@keyframes data-pulse {
     0% {
-        background-position: 0 0;
+        filter: brightness(1);
+        opacity: 0.9;
+    }
+
+    50% {
+        filter: brightness(1.3);
+        opacity: 1;
     }
 
     100% {
-        background-position: 28px 0;
+        filter: brightness(1);
+        opacity: 0.9;
     }
 }
+
+
 
 #status {
     color: var(--text-color);
@@ -722,10 +741,11 @@ button:disabled {
         /* Spacing for visual separation */
         width: 90% !important;
         /* Fit inside the status box padding */
-        background: rgba(255, 255, 255, 0.2) !important;
-        /* Whitish gray default track */
-        border-radius: 10px;
-        min-height: 6px;
+        /* Revert mobile specific BG to match new style */
+        background: transparent !important;
+        border: 1px dashed rgba(255, 255, 255, 0.3) !important;
+        border-radius: 4px;
+        min-height: 14px;
     }
 
     .disclaimer {
