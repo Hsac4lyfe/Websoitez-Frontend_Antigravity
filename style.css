@@ -514,14 +514,16 @@ button:disabled {
 }
 
 /* 2. Success State (Sealed) */
+/* 2. Success State (Sealed) */
 .bar-success {
     width: 100% !important;
     background: #ffffff !important;
     /* Solid White */
-    border-right: 0px solid transparent !important;
-    /* Cursor winks out */
+    border-right: none !important;
+    /* Kill cursor */
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
     animation: success-sweep 1.2s ease-out forwards !important;
+    /* This OVERRIDES glitch-flick */
 }
 
 /* 3. Flash & Sweep */
