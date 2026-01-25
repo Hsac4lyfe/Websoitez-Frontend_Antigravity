@@ -463,38 +463,13 @@ button:disabled {
     /* 6. Blinking Cursor Block */
     border-right: 6px solid #fff !important;
 
-    /* 4. Glitch Flick */
-    animation: glitch-flick 0.3s infinite !important;
+    /* No Glitch - just pure structural movement */
+    animation: none !important;
     box-shadow: none !important;
     border-radius: 0px !important;
     transition: none !important;
     /* 1. Instant appearing */
     pointer-events: none;
-}
-
-@keyframes glitch-flick {
-    0% {
-        opacity: 1;
-        filter: brightness(1);
-    }
-
-    25% {
-        opacity: 0.8;
-    }
-
-    50% {
-        opacity: 1;
-        filter: brightness(1.5);
-    }
-
-    75% {
-        opacity: 0.9;
-    }
-
-    100% {
-        opacity: 1;
-        filter: brightness(1);
-    }
 }
 
 /* --- PRESSURIZE & SEAL EFFECT --- */

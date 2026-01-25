@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.barEl.id = 'progress-bar'; /* Restore ID */
     DOM.barEl.style.width = '0%';
     DOM.barEl.style.transition = 'none';
-    DOM.barEl.style.animation = ''; /* Let CSS handle default */
+    DOM.barEl.style.animation = 'none';
     STATE.simulatedProgress = 0; /* track fake progress */
     DOM.statusEl.textContent = 'Warming up the servers…';
     DOM.timerEl.innerHTML = '00<span id="colon">:</span>00';
