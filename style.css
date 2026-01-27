@@ -265,7 +265,7 @@ body {
     object-fit: cover;
     /* Fill the screen */
     pointer-events: none;
-    filter: blur(10px) brightness(1.2);
+    filter: blur(11px) brightness(1.2);
     /* Light blur + slight brightness boost */
     z-index: -2 !important;
     /* Behind the main video */
