@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timerEl: document.getElementById('timer'),
     barEl: document.getElementById('progress-bar'),
     copyBtn: document.getElementById('copyBtn'),
+    clearBtn: document.getElementById('clearBtn'),
 
     // Ad Page
     adForm: document.getElementById('adForm'),
@@ -144,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.urlInput.addEventListener('input', updateInputAndButtonStates);
     DOM.transcribeBtn.addEventListener('click', transcribe);
     DOM.copyBtn.addEventListener('click', copyToClipboard);
+    DOM.clearBtn.addEventListener('click', handleClear);
   }
 
   function setupWipeAndReload() {
@@ -164,6 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.urlInput.disabled = STATE.isTranscribing;
     DOM.transcribeBtn.classList.toggle('is-pending', STATE.isTranscribing);
     DOM.copyBtn.disabled = STATE.isTranscribing;
+    DOM.clearBtn.disabled = STATE.isTranscribing;
   }
 
   function setUIState(isTranscribing) {
@@ -348,6 +351,31 @@ document.addEventListener('DOMContentLoaded', () => {
       DOM.copyBtn.textContent = 'Copied!';
       setTimeout(() => DOM.copyBtn.textContent = txt, 1500);
     });
+  }
+
+  function handleClear() {
+    // 6. Reset fully (as if refreshed)
+    DOM.urlInput.value = '';
+    DOM.resultEl.value = '';
+
+    // 7. Snap bar to 0
+    // 8. Default status
+    // 10. Hard reset timer
+    resetUI();
+
+    // resetUI specifically:
+    // - sets bar width 0
+    // - sets status "Warming up..." -> Wait, user asked for "Enter a link to begin" (default)
+    // - sets timer 00:00
+
+    // Override specific defaults requested if resetUI() differs
+    DOM.statusEl.textContent = 'Enter a link to begin';
+
+    // 5. Focus back to input
+    DOM.urlInput.focus();
+
+    // Update button states (disable transcribe etc)
+    updateInputAndButtonStates();
   }
 
   /* ================= AD PAGE LOGIC ================= */

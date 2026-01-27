@@ -494,6 +494,7 @@ button:disabled {
 .right-stack .button-group:last-of-type {
     display: flex;
     justify-content: center;
+    gap: 1rem;
 }
 
 .status-timer-group {
