@@ -198,6 +198,13 @@ document.addEventListener('DOMContentLoaded', () => {
     STATE.selectedFormat = item.dataset.value;
     DOM.dropdownBtn.textContent = `${item.textContent} ▼`;
     DOM.dropdown.classList.remove('show');
+
+    /* Adjust font size for Timestamps */
+    if (STATE.selectedFormat === 'timestamps') {
+      DOM.resultEl.style.fontSize = 'calc(1.05rem - 1.5px)';
+    } else {
+      DOM.resultEl.style.fontSize = '1.05rem';
+    }
   }
 
   function closeDropdown(e) {
