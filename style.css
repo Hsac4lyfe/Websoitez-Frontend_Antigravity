@@ -598,6 +598,57 @@ button:disabled {
 }
 
 /* 3. Flash & Sweep */
+
+/* --- DESTRUCTIVE CLEAR ANIMATIONS --- */
+.anim-shake {
+    animation: destructive-shake 0.4s cubic-bezier(.36, .07, .19, .97) both !important;
+    background: #500 !important;
+    border-color: #f00 !important;
+    color: #fff !important;
+}
+
+@keyframes destructive-shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    20% {
+        transform: translate(-4px, 0);
+    }
+
+    40% {
+        transform: translate(4px, 0);
+    }
+
+    60% {
+        transform: translate(-3px, 0);
+    }
+
+    80% {
+        transform: translate(3px, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.anim-purge {
+    animation: data-purge 0.4s ease-out forwards;
+}
+
+@keyframes data-purge {
+    0% {
+        filter: brightness(2) blur(2px);
+        opacity: 0.8;
+    }
+
+    100% {
+        filter: brightness(1) blur(0);
+        opacity: 1;
+    }
+}
+
 @keyframes success-sweep {
     0% {
         filter: brightness(5);

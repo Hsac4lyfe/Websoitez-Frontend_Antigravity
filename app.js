@@ -371,6 +371,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Override specific defaults requested if resetUI() differs
     DOM.statusEl.textContent = 'Enter a link to begin';
 
+    /* Trigger Animations */
+    DOM.clearBtn.classList.add('anim-shake');
+    DOM.urlInput.classList.add('anim-purge');
+    DOM.resultEl.classList.add('anim-purge');
+
+    setTimeout(() => {
+      DOM.clearBtn.classList.remove('anim-shake');
+      DOM.urlInput.classList.remove('anim-purge');
+      DOM.resultEl.classList.remove('anim-purge');
+    }, 400);
+
     // 5. Focus back to input
     DOM.urlInput.focus();
 
