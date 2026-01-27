@@ -14,6 +14,106 @@
     --logo-top: 5vh;
 }
 
+/* --- 5. Scanlines --- */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    opacity: 0.6;
+}
+
+/* --- 6. Peripheral Blur --- */
+.peripheral-blur-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+    backdrop-filter: blur(2px);
+    -webkit-mask: radial-gradient(circle at center, transparent 40%, black 100%);
+    mask: radial-gradient(circle at center, transparent 40%, black 100%);
+}
+
+/* --- 7. Blocky Scrollbar --- */
+::-webkit-scrollbar {
+    width: 14px;
+    background: #000;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+    border-left: 1px solid #333;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fff;
+    border: 3px solid #000;
+    /* Create blocky look */
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+
+/* --- 5. Scanlines --- */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    opacity: 0.6;
+}
+
+/* --- 6. Peripheral Blur --- */
+.peripheral-blur-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+    backdrop-filter: blur(2px);
+    -webkit-mask: radial-gradient(circle at center, transparent 40%, black 100%);
+    mask: radial-gradient(circle at center, transparent 40%, black 100%);
+}
+
+/* --- 7. Blocky Scrollbar --- */
+::-webkit-scrollbar {
+    width: 14px;
+    background: #000;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+    border-left: 1px solid #333;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fff;
+    border: 3px solid #000;
+    /* Create blocky look */
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+
 /*  fonts  */
 @font-face {
     font-family: 'DigitalPlay';
@@ -152,10 +252,42 @@ body {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* --- 2. Chromatic Aberration Text --- */
 .title-video:hover {
-    transform: scale(1.05);
-    /* Slight pop out */
+    animation: chromatic-glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+}
+
+@keyframes chromatic-glitch {
+    0% {
+        transform: translate(0);
+        filter: drop-shadow(-2px 0 rgba(255, 0, 0, 0.5)) drop-shadow(2px 0 rgba(0, 0, 255, 0.5));
+    }
+
+    20% {
+        transform: translate(-3px, 1px);
+        filter: drop-shadow(2px 0 rgba(0, 0, 255, 0.5)) drop-shadow(-2px 0 rgba(255, 0, 0, 0.5));
+    }
+
+    40% {
+        transform: translate(2px, -1px);
+        filter: drop-shadow(-2px 0 rgba(255, 0, 0, 0.5)) drop-shadow(4px 0 rgba(0, 0, 255, 0.5));
+    }
+
+    60% {
+        transform: translate(-1px, 2px);
+        filter: drop-shadow(2px 0 rgba(0, 0, 255, 0.5)) drop-shadow(-1px 0 rgba(255, 0, 0, 0.5));
+    }
+
+    80% {
+        transform: translate(1px, -2px);
+        filter: drop-shadow(-1px 0 rgba(255, 0, 0, 0.5)) drop-shadow(2px 0 rgba(0, 0, 255, 0.5));
+    }
+
+    100% {
+        transform: translate(0);
+        filter: drop-shadow(0 0 transparent);
+    }
 }
 
 #bg-video {
@@ -246,6 +378,47 @@ button,
 
 input {
     width: 90%;
+}
+
+/* --- 4. HUD Brackets (Corner Frames) --- */
+.hud-bracket {
+    position: relative;
+    /* Ensure brackets stick to input group */
+    background: transparent;
+    padding: 10px;
+    width: 100%;
+    /* Space for brackets */
+}
+
+/* Corners using gradients */
+.hud-bracket::before,
+.hud-bracket::after {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    content: '';
+    pointer-events: none;
+    border: 2px solid #fff;
+    transition: all 0.3s ease;
+}
+
+/* Top Left & Right */
+.hud-bracket::before {
+    top: -5px;
+    left: -5px;
+    border-bottom: none;
+    border-right: none;
+    /* Create 'L' shape */
+    box-shadow: -2px -2px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hud-bracket::after {
+    bottom: -5px;
+    right: -5px;
+    border-top: none;
+    border-left: none;
+    /* Create inverted 'L' shape */
+    box-shadow: 2px 2px 0 rgba(255, 255, 255, 0.1);
 }
 
 input#url {

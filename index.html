@@ -66,6 +66,9 @@
     </a>
   </div>
 
+  <div class="scanlines"></div>
+  <div class="peripheral-blur-mask"></div>
+
   <!-- MAIN -->
   <!-- 1. The wrapper MUST start here to center everything -->
   <div class="center-wrapper">
@@ -82,7 +85,12 @@
     <!-- 3. The Main Box -->
     <div class="container">
       <div class="right-stack">
-        <input id="url" placeholder="Paste Reel / TikTok / YouTube link here" type="url" autocomplete="off">
+        <!-- Input Group with HUD Brackets -->
+        <div class="input-group hud-bracket">
+          <div class="input-container">
+            <input id="url" placeholder="Paste Reel / TikTok / YouTube link here" type="url" autocomplete="off">
+          </div>
+        </div>
         <div class="button-group side">
           <div class="dropdown">
             <button id="dropdownBtn" class="dropbtn">Plain Text ▼</button>
