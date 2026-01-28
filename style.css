@@ -603,91 +603,106 @@ button:disabled {
     }
 }
 
-/* 2. Success State - GREEN flash (2 times, 0.5s interval) */
+/* 2. Success State - GREEN flash blocks (2 times, 0.5s interval) */
 #progress-bar.bar-success {
-    width: calc(100% - 6px) !important;
-    border-radius: 2px !important;
-    /* Override the striped background with solid for flashing */
-    background: #ffffff !important;
-    background-image: none !important;
-    /* Flash animation: white -> green -> white -> green -> white */
-    animation: flash-green 1s ease-out forwards !important;
+    /* Flash animation with colored blocks */
+    animation: flash-green-blocks 1s ease-out forwards !important;
 }
 
-/* 3. Error State - RED flash (3 times, 0.5s interval) + shake */
+/* 3. Error State - RED flash blocks (3 times, 0.5s interval) + shake */
 #progress-bar.bar-error {
-    border-radius: 2px !important;
-    /* Override the striped background with solid for flashing */
-    background: #ffffff !important;
-    background-image: none !important;
-    /* Flash animation: white -> red -> white -> red -> white -> red -> white */
-    animation: flash-red 1.5s ease-out forwards, bar-shake 0.4s cubic-bezier(.36, .07, .19, .97) !important;
+    /* Flash animation with colored blocks + shake */
+    animation: flash-red-blocks 1.5s ease-out forwards, bar-shake 0.4s cubic-bezier(.36, .07, .19, .97) !important;
 }
 
-/* Green flash keyframes (2 flashes over 1 second) */
-@keyframes flash-green {
+/* Green flash keyframes (2 flashes over 1 second) - keeps block pattern */
+@keyframes flash-green-blocks {
     0% {
-        background: #ffffff;
+        background: repeating-linear-gradient(90deg,
+                #ffffff 0px, #ffffff 12px,
+                transparent 12px, transparent 16px);
         box-shadow: none;
     }
 
     10% {
-        background: #00ff00;
+        background: repeating-linear-gradient(90deg,
+                #00ff00 0px, #00ff00 12px,
+                transparent 12px, transparent 16px);
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.9);
     }
 
     40% {
-        background: #ffffff;
+        background: repeating-linear-gradient(90deg,
+                #ffffff 0px, #ffffff 12px,
+                transparent 12px, transparent 16px);
         box-shadow: none;
     }
 
     50% {
-        background: #00ff00;
+        background: repeating-linear-gradient(90deg,
+                #00ff00 0px, #00ff00 12px,
+                transparent 12px, transparent 16px);
         box-shadow: 0 0 15px rgba(0, 255, 0, 0.9);
     }
 
     80%,
     100% {
-        background: #ffffff;
+        background: repeating-linear-gradient(90deg,
+                #ffffff 0px, #ffffff 12px,
+                transparent 12px, transparent 16px);
         box-shadow: none;
     }
 }
 
-/* Red flash keyframes (3 flashes over 1.5 seconds) */
-@keyframes flash-red {
+/* Red flash keyframes (3 flashes over 1.5 seconds) - keeps block pattern */
+@keyframes flash-red-blocks {
     0% {
-        background: #ffffff;
+        background: repeating-linear-gradient(90deg,
+                #ffffff 0px, #ffffff 12px,
+                transparent 12px, transparent 16px);
         box-shadow: none;
     }
 
     6% {
-        background: #ff3333;
+        background: repeating-linear-gradient(90deg,
+                #ff3333 0px, #ff3333 12px,
+                transparent 12px, transparent 16px);
         box-shadow: 0 0 15px rgba(255, 0, 0, 0.9);
     }
 
     27% {
-        background: #ffffff;
+        background: repeating-linear-gradient(90deg,
+                #ffffff 0px, #ffffff 12px,
+                transparent 12px, transparent 16px);
         box-shadow: none;
     }
 
     33% {
-        background: #ff3333;
+        background: repeating-linear-gradient(90deg,
+                #ff3333 0px, #ff3333 12px,
+                transparent 12px, transparent 16px);
         box-shadow: 0 0 15px rgba(255, 0, 0, 0.9);
     }
 
     54% {
-        background: #ffffff;
+        background: repeating-linear-gradient(90deg,
+                #ffffff 0px, #ffffff 12px,
+                transparent 12px, transparent 16px);
         box-shadow: none;
     }
 
     60% {
-        background: #ff3333;
+        background: repeating-linear-gradient(90deg,
+                #ff3333 0px, #ff3333 12px,
+                transparent 12px, transparent 16px);
         box-shadow: 0 0 15px rgba(255, 0, 0, 0.9);
     }
 
     80%,
     100% {
-        background: #ffffff;
+        background: repeating-linear-gradient(90deg,
+                #ffffff 0px, #ffffff 12px,
+                transparent 12px, transparent 16px);
         box-shadow: none;
     }
 }
