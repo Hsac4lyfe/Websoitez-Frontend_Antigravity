@@ -425,12 +425,31 @@ button:hover:not(:disabled) {
     /* Subtle lighten */
 }
 
-button:disabled {
-    background: #000;
+/* Disabled State - Keep mechanical shadow, grayed out look */
+button:disabled,
+.dropbtn:disabled {
+    background: #000 !important;
     border-color: #333 !important;
     color: #555 !important;
-    box-shadow: none !important;
-    cursor: not-allowed;
+    /* KEEP the mechanical shadow */
+    box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.15) !important;
+    cursor: not-allowed !important;
+    /* Prevent any transform on click */
+    transform: none !important;
+}
+
+/* No hover effect when disabled (static) */
+button:disabled:hover,
+.dropbtn:disabled:hover {
+    background: #000 !important;
+    /* No color change on hover */
+}
+
+/* No active/pressed effect when disabled */
+button:disabled:active,
+.dropbtn:disabled:active {
+    transform: none !important;
+    box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.15) !important;
 }
 
 /* --- TRANSCRIBE DOMINANCE (Scanline Effect) --- */
@@ -450,6 +469,7 @@ button:disabled {
     transition: none;
 }
 
+/* Scanline sweep works even when disabled */
 #transcribeBtn:hover::after {
     animation: scanline-swipe 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
@@ -471,7 +491,8 @@ button:disabled {
 }
 
 /* --- COPY SUBTLETY --- */
-#copyBtn:hover {
+/* No hover effect on copy when disabled */
+#copyBtn:hover:not(:disabled) {
     filter: brightness(1.3);
 }
 
