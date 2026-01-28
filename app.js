@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Shared
     cursor: document.getElementById('customCursor'),
     bgVideo: document.getElementById('bg-video'),
-    bgVideoBlur: document.getElementById('bg-video-blur'), // New
+    bgVideoBlur: document.getElementById('bg-video-blur'),
+    bgToggleBtn: document.getElementById('bgToggleBtn'),
     logoVideo: document.querySelector('.title-video video'),
 
     // Home Page
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isTranscribing: false,
     startTime: 0,
     timerRAF: null,
+    bgEnabled: true,
   };
 
   /* ================= INIT ================= */
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function init() {
     setupCursor();
     setupBackgroundVideo();
+    setupBgToggle();
 
     if (DOM.transcribeBtn) {
       setupHomeListeners();
@@ -135,6 +138,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+  }
+
+  /* ================= BACKGROUND TOGGLE ================= */
+
+  function setupBgToggle() {
+    if (!DOM.bgToggleBtn) return;
+
+    DOM.bgToggleBtn.addEventListener('click', toggleBackground);
+  }
+
+  function toggleBackground() {
+    STATE.bgEnabled = !STATE.bgEnabled;
+
+    const textEl = DOM.bgToggleBtn.querySelector('.bg-toggle-text');
+
+    // Add toggle animation
+    DOM.bgToggleBtn.classList.add('toggling');
+    setTimeout(() => {
+      DOM.bgToggleBtn.classList.remove('toggling');
+    }, 300);
+
+    if (STATE.bgEnabled) {
+      // Show backgrounds with fade
+      if (DOM.bgVideo) DOM.bgVideo.classList.remove('bg-hidden');
+      if (DOM.bgVideoBlur) DOM.bgVideoBlur.classList.remove('bg-hidden');
+      DOM.bgToggleBtn.classList.remove('bg-off');
+      if (textEl) textEl.textContent = 'BG ON';
+    } else {
+      // Hide backgrounds with fade
+      if (DOM.bgVideo) DOM.bgVideo.classList.add('bg-hidden');
+      if (DOM.bgVideoBlur) DOM.bgVideoBlur.classList.add('bg-hidden');
+      DOM.bgToggleBtn.classList.add('bg-off');
+      if (textEl) textEl.textContent = 'BG OFF';
+    }
   }
 
   /* ================= HOME PAGE LOGIC ================= */
