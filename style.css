@@ -608,8 +608,6 @@ button:disabled {
     /* Fix: Disable interaction and transitions during shake to prevent :active conflicts */
     pointer-events: none !important;
     transition: none !important;
-    transform: translate(0, 0) !important;
-    /* Base reset */
 }
 
 @keyframes destructive-shake {
