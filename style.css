@@ -513,51 +513,70 @@ button:disabled {
     opacity: 1 !important;
 }
 
+/* --- PIXEL RETRO PROGRESS BAR --- */
 #progress-container {
     position: relative;
     width: 100%;
-    height: 14px;
-    /* Track: Wireframe Outline */
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    height: 22px;
+    /* Track: Solid white outline */
+    border: 2px solid #ffffff !important;
     background: #000000 !important;
-    /* Static background */
-    /* Ensure high contrast */
-    border-radius: 4px;
-    padding: 2px;
-    /* Gap between track and bar */
+    /* Slightly rounded corners (not sharp, not too round) */
+    border-radius: 3px;
+    padding: 3px;
+    /* Gap between track and blocks */
     overflow: hidden;
     margin: 0;
     pointer-events: none;
+    box-sizing: border-box;
 }
 
 #progress-bar {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    top: 3px;
+    left: 3px;
+    bottom: 3px;
     width: 0%;
-    /* 5. Vertical Bars Pattern */
+    /* Chunky square blocks pattern */
     background: repeating-linear-gradient(90deg,
-            #fff 0px,
-            #fff 4px,
-            /* 4px bar */
-            transparent 4px,
-            transparent 6px
-            /* 2px gap */
+            #ffffff 0px,
+            #ffffff 12px,
+            /* 12px white block */
+            transparent 12px,
+            transparent 16px
+            /* 4px gap */
         ) !important;
-    background-color: #000 !important;
-    background-size: 100% 100% !important;
+    background-color: transparent !important;
+    background-size: 16px 100% !important;
+    /* Each segment is 16px total (12px block + 4px gap) */
 
-    /* 6. Blinking Cursor Block */
-    border-right: 6px solid #fff !important;
+    /* Slightly rounded block corners */
+    border-radius: 2px !important;
 
-    /* No Glitch - just pure structural movement */
-    animation: none !important;
+    /* No cursor block - clean edge */
+    border-right: none !important;
+
+    /* Discrete stepping animation */
+    transition: width 0.1s steps(1, end) !important;
+
+    /* Subtle pulse while loading */
+    animation: blockPulse 1.5s ease-in-out infinite !important;
+
     box-shadow: none !important;
-    border-radius: 0px !important;
-    transition: none !important;
-    /* 1. Instant appearing */
     pointer-events: none;
+}
+
+/* Subtle breathing/pulse effect */
+@keyframes blockPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.85;
+    }
 }
 
 /* --- PRESSURIZE & SEAL EFFECT --- */
@@ -584,17 +603,15 @@ button:disabled {
     }
 }
 
-/* 2. Success State (Sealed) */
-/* 2. Success State (Sealed) */
+/* 2. Success State (Sealed - all blocks filled) */
 .bar-success {
-    width: 100% !important;
+    width: calc(100% - 6px) !important;
+    /* Fill solid white (no gaps) */
     background: #ffffff !important;
-    /* Solid White */
-    border-right: none !important;
-    /* Kill cursor */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+    border-radius: 2px !important;
+    /* Bright glow on completion */
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.9) !important;
     animation: success-sweep 1.2s ease-out forwards !important;
-    /* This OVERRIDES glitch-flick */
 }
 
 /* 3. Flash & Sweep */
@@ -972,11 +989,11 @@ button:disabled {
         /* Spacing for visual separation */
         width: 90% !important;
         /* Fit inside the status box padding */
-        /* Revert mobile specific BG to match new style */
         background: #000000 !important;
-        border: 1px solid rgba(255, 255, 255, 0.5) !important;
-        border-radius: 4px;
-        min-height: 14px;
+        border: 2px solid #ffffff !important;
+        border-radius: 3px;
+        min-height: 20px;
+        height: 20px;
     }
 
     .disclaimer {
