@@ -421,7 +421,7 @@ button:active:not(:disabled),
 
 /* Hover State - General */
 button:hover:not(:disabled) {
-    background: #111 !important;
+    background: #333 !important;
     /* Subtle lighten */
 }
 
