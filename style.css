@@ -545,24 +545,24 @@ button:disabled {
             transparent 12px,
             transparent 16px
             /* 4px gap */
-        ) !important;
-    background-color: transparent !important;
-    background-size: 16px 100% !important;
+        );
+    background-color: transparent;
+    background-size: 16px 100%;
     /* Each segment is 16px total (12px block + 4px gap) */
 
     /* Slightly rounded block corners */
-    border-radius: 2px !important;
+    border-radius: 2px;
 
     /* No cursor block - clean edge */
-    border-right: none !important;
+    border-right: none;
 
     /* Discrete stepping animation */
-    transition: width 0.1s steps(1, end) !important;
+    transition: width 0.1s steps(1, end);
 
     /* Subtle pulse while loading */
-    animation: blockPulse 1.5s ease-in-out infinite !important;
+    animation: blockPulse 1.5s ease-in-out infinite;
 
-    box-shadow: none !important;
+    box-shadow: none;
     pointer-events: none;
 }
 
@@ -604,16 +604,22 @@ button:disabled {
 }
 
 /* 2. Success State - GREEN flash (2 times, 0.5s interval) */
-.bar-success {
+#progress-bar.bar-success {
     width: calc(100% - 6px) !important;
     border-radius: 2px !important;
+    /* Override the striped background with solid for flashing */
+    background: #ffffff !important;
+    background-image: none !important;
     /* Flash animation: white -> green -> white -> green -> white */
     animation: flash-green 1s ease-out forwards !important;
 }
 
 /* 3. Error State - RED flash (3 times, 0.5s interval) + shake */
-.bar-error {
+#progress-bar.bar-error {
     border-radius: 2px !important;
+    /* Override the striped background with solid for flashing */
+    background: #ffffff !important;
+    background-image: none !important;
     /* Flash animation: white -> red -> white -> red -> white -> red -> white */
     animation: flash-red 1.5s ease-out forwards, bar-shake 0.4s cubic-bezier(.36, .07, .19, .97) !important;
 }
