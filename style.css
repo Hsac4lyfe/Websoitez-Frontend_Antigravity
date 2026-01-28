@@ -1343,6 +1343,7 @@ a.title-video {
         left: 50%;
         right: auto;
         margin-left: -5px;
+        margin-top: 0;
         border-color: #ffffff transparent transparent transparent;
     }
 
