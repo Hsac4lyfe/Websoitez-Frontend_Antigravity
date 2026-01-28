@@ -603,15 +603,61 @@ button:disabled {
     }
 }
 
-/* 2. Success State (Sealed - all blocks filled) */
+/* 2. Success State (Sealed - GREEN glow) */
 .bar-success {
     width: calc(100% - 6px) !important;
-    /* Fill solid white (no gaps) */
-    background: #ffffff !important;
+    /* Fill solid green */
+    background: #00ff00 !important;
     border-radius: 2px !important;
-    /* Bright glow on completion */
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.9) !important;
+    /* Bright green glow on completion */
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.9), 0 0 30px rgba(0, 255, 0, 0.5) !important;
     animation: success-sweep 1.2s ease-out forwards !important;
+}
+
+/* 3. Error State (RED glow + shake) */
+.bar-error {
+    /* Fill solid red */
+    background: #ff3333 !important;
+    border-radius: 2px !important;
+    /* Bright red glow on error */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.5) !important;
+    animation: bar-shake 0.4s cubic-bezier(.36, .07, .19, .97) both !important;
+}
+
+/* Error container also gets red border */
+#progress-container.container-error {
+    border-color: #ff3333 !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5) !important;
+}
+
+/* Success container gets green border */
+#progress-container.container-success {
+    border-color: #00ff00 !important;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5) !important;
+}
+
+@keyframes bar-shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-4px);
+    }
+
+    40% {
+        transform: translateX(4px);
+    }
+
+    60% {
+        transform: translateX(-3px);
+    }
+
+    80% {
+        transform: translateX(3px);
+    }
 }
 
 /* 3. Flash & Sweep */
