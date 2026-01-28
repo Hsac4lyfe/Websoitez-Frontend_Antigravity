@@ -605,6 +605,11 @@ button:disabled {
     background: #500 !important;
     border-color: #f00 !important;
     color: #fff !important;
+    /* Fix: Disable interaction and transitions during shake to prevent :active conflicts */
+    pointer-events: none !important;
+    transition: none !important;
+    transform: translate(0, 0) !important;
+    /* Base reset */
 }
 
 @keyframes destructive-shake {
@@ -639,12 +644,13 @@ button:disabled {
 
 @keyframes data-purge {
     0% {
-        filter: brightness(2) blur(2px);
-        opacity: 0.8;
+        /* Fix: Brightness(2) on black is still black. Use INVERT for true flash. */
+        filter: invert(1) blur(2px);
+        opacity: 1;
     }
 
     100% {
-        filter: brightness(1) blur(0);
+        filter: invert(0) blur(0);
         opacity: 1;
     }
 }
