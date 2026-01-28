@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
     DOM.barEl.style.width = '0%';
     DOM.barEl.className = ''; /* Nukes ALL classes */
     DOM.barEl.id = 'progress-bar'; /* Restore ID */
-    DOM.progressContainer.classList.remove('container-success', 'container-error'); /* Clear state classes */
     DOM.barEl.style.width = '0%';
     DOM.barEl.style.transition = 'none';
     DOM.barEl.style.animation = 'none';
@@ -265,11 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
       /* 1. Trigger Recoil (Kickback) */
       DOM.barEl.classList.add('bar-recoil');
 
-      /* 2. Seal & Flash after recoil (500ms) - GREEN SUCCESS */
+      /* 2. Seal & Flash after recoil (500ms) - GREEN flash 2x */
       setTimeout(() => {
         DOM.barEl.classList.remove('bar-recoil');
         DOM.barEl.classList.add('bar-success');
-        DOM.progressContainer.classList.add('container-success');
         DOM.barEl.style.width = '100%';
         STATE.simulatedProgress = 100;
       }, 500);
@@ -284,9 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(err);
       DOM.statusEl.textContent = 'Connection failed. Please try again.';
 
-      /* ERROR STATE - RED glow + shake */
+      /* ERROR STATE - RED flash 3x + shake */
       DOM.barEl.classList.add('bar-error');
-      DOM.progressContainer.classList.add('container-error');
     } finally {
       stopTimer();
       setUIState(false);
