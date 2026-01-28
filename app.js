@@ -408,6 +408,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function setupValidation(input, tooltip) {
     input.addEventListener('invalid', (e) => {
       e.preventDefault();
+      // Remove -> Trigger Reflow -> Add (Restarts Animation)
+      tooltip.classList.remove('show');
+      void tooltip.offsetWidth;
       tooltip.classList.add('show');
     });
     input.addEventListener('input', () => {
