@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     messageTooltip: document.getElementById('messageTooltip'),
     charCount: document.getElementById('count'),
     successMsg: document.getElementById('successMsg'),
+
+    // Container for styling
+    statusGroup: document.querySelector('.status-timer-group'),
   };
 
   /* ================= STATE ================= */
@@ -225,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     STATE.simulatedProgress = 0; /* track fake progress */
     DOM.statusEl.textContent = 'Warming up the servers…';
     DOM.timerEl.innerHTML = '00<span id="colon">:</span>00';
+    if (DOM.statusGroup) DOM.statusGroup.classList.remove('timer-active');
   }
 
   function toggleDropdown(e) {
@@ -288,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setUIState(true);
     resetUI();
     startTimer();
+    if (DOM.statusGroup) DOM.statusGroup.classList.add('timer-active');
     simulateProgress(); /* Start the simulation loop */
 
     try {
@@ -324,6 +329,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } finally {
       stopTimer();
       setUIState(false);
+      // Keep .timer-active for a moment if successful? 
+      // User said "while it's running". So remove it when done.
+      if (DOM.statusGroup) DOM.statusGroup.classList.remove('timer-active');
     }
   }
 
