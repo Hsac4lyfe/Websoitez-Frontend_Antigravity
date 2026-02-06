@@ -546,6 +546,7 @@ button:disabled:active,
 }
 
 /* The Background Image Layer */
+/* The Background Image Layer */
 .status-timer-group::before {
     content: "";
     position: absolute;
@@ -560,10 +561,10 @@ button:disabled:active,
     /* Align to bottom to catch the timer area */
     background-repeat: no-repeat;
     opacity: 0;
-    z-index: 0;
+    z-index: 1;
+    /* Increased z-index */
     transition: opacity 0.2s ease;
-    mix-blend-mode: screen;
-    /* Ensures black background blends if needed */
+    /* mix-blend-mode removed to ensure opacity works simply */
     pointer-events: none;
 }
 
@@ -606,7 +607,7 @@ button:disabled:active,
 /* Adjust Content to sit ON TOP of background */
 .status-timer-group>* {
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 
 /* --- TIMER ALIGNMENT --- */
