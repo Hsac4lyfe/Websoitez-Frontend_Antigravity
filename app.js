@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startTime: 0,
     timerRAF: null,
     bgEnabled: true,
+    mockMode: false,
   };
 
   /* ================= INIT ================= */
@@ -73,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (DOM.adForm) {
       setupAdListeners();
     }
+
+    setupTestMode();
   }
 
   /* ================= SHARED: CURSOR ================= */
@@ -174,6 +177,58 @@ document.addEventListener('DOMContentLoaded', () => {
       if (DOM.bgVideoBlur) DOM.bgVideoBlur.classList.add('bg-hidden');
       DOM.bgToggleBtn.classList.add('bg-off');
       if (textEl) textEl.textContent = 'BG OFF';
+    }
+  }
+
+  /* ================= TEST MODE ================= */
+
+  function setupTestMode() {
+    const btn = document.getElementById('testModeBtn');
+    const modal = document.getElementById('passwordModal');
+    const input = document.getElementById('modalPassword');
+    const submit = document.getElementById('modalSubmit');
+    const cancel = document.getElementById('modalCancel');
+
+    if (!btn || !modal) return;
+
+    btn.addEventListener('click', () => {
+      // Open Modal
+      modal.style.display = 'flex';
+      input.value = '';
+      input.focus();
+    });
+
+    submit.addEventListener('click', checkPassword);
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') checkPassword();
+    });
+
+    cancel.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    function checkPassword() {
+      if (input.value === 'test123') {
+        toggleMockMode();
+        modal.style.display = 'none';
+      } else {
+        alert('ACCESS DENIED');
+        input.value = '';
+      }
+    }
+
+    function toggleMockMode() {
+      STATE.mockMode = !STATE.mockMode;
+      const textEl = btn.querySelector('.bg-toggle-text');
+
+      if (STATE.mockMode) {
+        btn.classList.add('is-active');
+        textEl.textContent = 'TEST ON';
+        // Force "success" colors or indicator if needed
+      } else {
+        btn.classList.remove('is-active');
+        textEl.textContent = 'TEST OFF';
+      }
     }
   }
 
@@ -296,10 +351,34 @@ document.addEventListener('DOMContentLoaded', () => {
     simulateProgress(); /* Start the simulation loop */
 
     try {
-      const taskId = await startTranscription(url);
-      const transcript = await pollForResult(taskId);
+      let resultText;
 
-      DOM.resultEl.value = transcript;
+      /* --- MOCK MODE LOGIC --- */
+      if (STATE.mockMode) {
+        // 1. Wait 10 seconds (simulated)
+        // We need to keep the UI responsive, so we await a timeout loop
+        const mockDuration = 10000;
+        const startMock = performance.now();
+
+        // Loop until 10s passed
+        while (performance.now() - startMock < mockDuration) {
+          // Check if user cancelled (resetUI clears state?) 
+          // For simplicity, just wait 100ms chunks to allow UI updates if single threaded (JS is single threaded, this blocks rendering if we are not careful)
+          // Actually, await default timeout is better.
+          if (!STATE.isTranscribing) break; // Exit if user hit Clear
+          await new Promise(r => setTimeout(r, 100));
+        }
+
+        if (!STATE.isTranscribing) return; // Abort if cleared
+
+        resultText = "Simulated Transcription Result";
+      } else {
+        /* --- REAL LOGIC --- */
+        const taskId = await startTranscription(url);
+        resultText = await pollForResult(taskId);
+      }
+
+      DOM.resultEl.value = resultText;
       DOM.statusEl.textContent = 'Transcription complete!';
       DOM.statusEl.textContent = 'Transcription complete!';
 

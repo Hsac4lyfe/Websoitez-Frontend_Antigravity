@@ -132,6 +132,24 @@
     <source src="cursor05.webm" type="video/webm">
   </video>
 
+  <!-- TEST MODE TOGGLE (Bottom Left) -->
+  <button id="testModeBtn" class="bg-toggle-btn test-mode-btn" title="Toggle Test Mode"
+    style="left: 20px; right: auto;">
+    <span class="bg-toggle-text">TEST OFF</span>
+  </button>
+
+  <!-- PASSWORD MODAL -->
+  <div id="passwordModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <p>ENTER PASSWORD</p>
+      <input type="password" id="modalPassword" placeholder="Password..." autocomplete="off">
+      <div class="modal-buttons">
+        <button id="modalSubmit">CONFIRM</button>
+        <button id="modalCancel">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 
   <!-- wipe + hard-reload helpers -->
